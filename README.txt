@@ -19,5 +19,7 @@ Implementacja SecureForm Paylane dla darowizn
 Zainstaluj, Aktywuj, w Ustawieniach wybierz kwoty, podaj merchant_id i salta.
 
 == Changelog ==
+= 1.1 =
+Dodano dowolną kwotę, regulamin oraz nadpis ustawień z poziomu widget'u
 = 1.0 =
 * Będzie żyć ;).
