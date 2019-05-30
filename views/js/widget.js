@@ -1,9 +1,18 @@
 (function($) {
   "use strict";
-  jQuery("button.paylane_sf_amount_button").click(function(e) {
-    jQuery("button.paylane_sf_amount_button.selected").each(function(e) {
-      jQuery(this).removeClass("selected");
-    });
+  jQuery(".paylane-sf-widget .paylane-sf-amount-button").click(function(e) {
+    var $that = this;
+    jQuery(".paylane-sf-widget .paylane-sf-amount-button.selected").each(
+      function(e) {
+        jQuery(this).removeClass("selected");
+        if (
+          jQuery(this).attr("type") == "number" &&
+          jQuery($that).attr("type") != "number"
+        ) {
+          jQuery(this).val("");
+        }
+      }
+    );
     jQuery(this).addClass("selected");
   });
 
@@ -14,21 +23,29 @@
       "disabled"
     );
     e.preventDefault();
+    var input = jQuery(".paylane-sf-widget .paylane-sf-amount-button.selected");
+    var amountVar = 0.0;
+    if (jQuery(input).attr("type") == "number") {
+      amountVar = jQuery(input).val();
+    } else {
+      amountVar = jQuery(input).data("amount");
+    }
+
     var data = {
       action: "paylane_sf_get_hash",
-      amount: jQuery("button.paylane_sf_amount_button.selected").data("amount")
+      amount: amountVar,
+      source: window.location.href
     };
     jQuery.post(ajax_options.admin_ajax_url, data, function(response) {
       jQuery(".paylane-sf-widget-form button[type=submit]").removeClass(
         "loading"
       );
-      jQuery(".paylane-sf-widget-form button[type=submit]").attr(
+      jQuery(".paylane-sf-widget-form button[type=submit]").prop(
         "disabled",
-        ""
+        false
       );
-      console.log(response);
       var formHtml = response;
-
+      console.log(response);
       var parsedHtml = jQuery.parseHTML(formHtml);
       jQuery(parsedHtml)
         .appendTo("body")
