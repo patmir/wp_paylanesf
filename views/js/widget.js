@@ -29,6 +29,13 @@
       amountVar = jQuery(input).val();
       if(amountVar < 0.01){
         jQuery(input).val("");
+        jQuery(".paylane-sf-widget-form button[type=submit]").removeClass(
+        "loading"
+      );
+      jQuery(".paylane-sf-widget-form button[type=submit]").prop(
+        "disabled",
+        false
+      );
         return;
       }
     } else {
