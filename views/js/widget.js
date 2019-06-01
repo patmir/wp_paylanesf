@@ -27,6 +27,10 @@
     var amountVar = 0.0;
     if (jQuery(input).attr("type") == "number") {
       amountVar = jQuery(input).val();
+      if(amountVar < 0.01){
+        jQuery(input).val("");
+        return;
+      }
     } else {
       amountVar = jQuery(input).data("amount");
     }
