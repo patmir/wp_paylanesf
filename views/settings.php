@@ -7,6 +7,8 @@ $url = isset($options['url']) ? esc_attr($options['url']) : '';
 $submit = isset($options['submit']) ? esc_attr($options['submit']) : '';
 $dowKwota = isset($options['dowolnaKwota']) ? esc_attr($options['dowolnaKwota']) : '';
 $regulamin = isset($options['regulaminWiadomosc']) ? esc_attr($options['regulaminWiadomosc']) : '';
+$waluty = isset($options['waluty']) ? esc_attr($options['waluty']) : '';
+$cele = isset($options['cele']) ? esc_attr($options['cele']) : '';
 ?>
 
 <div class="wrap">
@@ -25,6 +27,8 @@ $regulamin = isset($options['regulaminWiadomosc']) ? esc_attr($options['regulami
           MerchantID wpisz w polu <kbd>Merchant ID</kbd></br></br>
           Salt wpisz w polu <kbd>Salt</kbd></br></br>
           Aby podać kwoty, wpisz kwoty z kropką, oddzielone <kbd>;</kbd>, np.: <kbd>5.00;20.00;100.00;1000.00</kbd></br></br>
+          Wybrane waluty należy wpisać w pole <kbd>Waluty</kbd> w formie ISO, tak jak kwoty. Pierwsza waluta będzie walutą domyślną.</br></br>
+          Cele należy wpisać w polu <kbd>Cele</kbd> w taki sam sposób, jak kwoty. Wybrany cel zostanie użyty jako tytuł transakcji z przedrostkiem "Darowizna na".</br></br>
           Aby wyświetlać pole na wpisanie dowolnej kwoty, zaznacz <kbd>Dowolna Kwota</kbd></br></br>
           Jeśli chcesz pokazać specjalną stronę z podziękowaniami, podaj jej pełny adres w plu <kbd>Strona z podziękowaniem</kbd>. W innym wypadku zostanie użyty adres strony z widgetem. (Widget obsłuży dane zwrócone z paylane).</br></br>
           Aby pokazać checkbox z regulaminem, podaj tekst wraz z linkiem do regulaminu w polu <kbd>Regulamin</kbd>, np <code>Kontynuując akceptujesz &lt;a href='http://stronazregulaminem.pl'&gt;Regulamin&lt;/a&gt;</code>
@@ -46,6 +50,12 @@ $regulamin = isset($options['regulaminWiadomosc']) ? esc_attr($options['regulami
           </div>
         </div>
         <div class="form-group">
+          <label for="input-waluty" class="col-sm-2 control-label">Waluty</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-waluty" placeholder="Waluty" value="<?= $waluty; ?>" name="options[waluty]">
+          </div>
+        </div>
+        <div class="form-group">
           <label for="input-kwoty" class="col-sm-2 control-label">Kwoty</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="input-kwoty" placeholder="Kwoty" value="<?= $kwota; ?>" name="options[kwoty]">
@@ -55,6 +65,12 @@ $regulamin = isset($options['regulaminWiadomosc']) ? esc_attr($options['regulami
           <label for="input-kwotaDow" class="col-sm-2 control-label">Dowolna Kwota</label>
           <div class="col-sm-10">
             <input type="checkbox" class="form-control" id="input-kwotaDow" checked="<?= $dowKwota; ?>" name="options[dowolnaKwota]">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input-cele" class="col-sm-2 control-label">Cele</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="input-cele" placeholder="Cele" value="<?= $cele; ?>" name="options[cele]">
           </div>
         </div>
         <div class="form-group">

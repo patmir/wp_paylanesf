@@ -61,7 +61,14 @@ public function register_paylance_sfwidgets_scripts()
 {
 	wp_register_script('paylane-sf-widget-js', plugin_dir_url(__FILE__) . '../views/js/widget.js', array('jquery'), false, true);
 }
-
+function isNullOrEmpty($string)
+{
+	if (!isset($string) || trim($string) === '') {
+		return true;
+	} else {
+		return false;
+	}
+}
 public function paylane_sf_get_hash()
 {
 	global $wpdb;
@@ -70,12 +77,17 @@ public function paylane_sf_get_hash()
 	$options = get_option('paylane_sf_settings');
 	$mid = isset($options['mid']) ? $options['mid'] : '';
 	$salt = isset($options['salt']) ? $options['salt'] : '';
-	$url = isset($options['url']) && !empty($options['url']) ? $options['url'] : $_POST['source'] . (isset($calling_url_isQuery) ? "&paylaneSFTY=1" : "?paylaneSFTY=1");
-
+	$url = $_POST['source'] . (isset($calling_url_isQuery) ? "&paylaneSFTY=1" : "?paylaneSFTY=1");
+	if (isset($options['url']) && trim($options['url']) !== "") {
+		$url = $options['url'];
+	};
 	$desc = "FWN_" . substr(md5(mt_rand()), 0, 10);
 	$type = "S";
-	$currency = "PLN";
-	$trans_desc = "DAROWIZNA NA CELE STATUTOWE"; // . $amount . " " . $currency;
+
+	$cel = 	$_POST['purpose'];
+	$waluta = $_POST['currency'];
+	$currency =  isset($waluta) ? $waluta : "PLN";
+	$trans_desc = "DAROWIZNA NA" . (isset($cel) ? " " . mb_strtoupper($cel) : " CELE STATUTOWE");
 	$hash = SHA1($salt + "|" + $desc + "|" + $amount + "|" + $currency + "|" + $type);
 
 	?>

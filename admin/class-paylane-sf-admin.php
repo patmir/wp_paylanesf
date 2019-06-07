@@ -95,6 +95,8 @@ class Paylane_Sf_Admin
 			$_POST['options']['salt'] = sanitize_text_field($_POST['options']['salt']);
 			$_POST['options']['submit'] = sanitize_text_field($_POST['options']['submit']);
 			$_POST['options']['url'] = esc_url($_POST['options']['url']);
+			$_POST['options']['waluty'] = sanitize_text_field($_POST['options']['waluty']);
+			$_POST['options']['cele'] = sanitize_text_field($_POST['options']['cele']);
 
 
 
