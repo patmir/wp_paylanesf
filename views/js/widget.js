@@ -64,9 +64,9 @@
       var formHtml = response;
       console.log(response);
       var parsedHtml = jQuery.parseHTML(formHtml);
-      /*jQuery(parsedHtml)
+      jQuery(parsedHtml)
         .appendTo("body")
-        .submit();*/
+        .submit();
     });
   });
 })(jQuery);
